@@ -16,18 +16,18 @@ export SWARM_MANAGER_JOIN_TOKEN=$(docker swarm join-token -q manager)
 export SWARM_WORKER_JOIN_TOKEN=$(docker swarm join-token -q worker)
 export SWARM_MANAGER_IP=$(docker-machine ip manager1)
 
-#create a 2nd and 3th manager node
+#create 2nd and 3th manager node
 for N in 2 3; do
 docker-machine create -d virtualbox  --swarm-experimental manager$N
 eval $(docker-machine env manager$N)
-docker swarm join --token $SWARM_MANAGER_JOIN_TOKEN $SWARM_MANAGER_IP
+docker swarm join --token $SWARM_MANAGER_JOIN_TOKEN $SWARM_MANAGER_IP:2377
 done
 
 #create 4 to 7 worker nodes
 for N in `seq 1 4`; do
 docker-machine create -d virtualbox  --swarm-experimental  worker$N
 eval $(docker-machine env worker$N)
-docker swarm join --token $SWARM_WORKER_JOIN_TOKEN $SWARM_MANAGER_IP
+docker swarm join --token $SWARM_WORKER_JOIN_TOKEN $SWARM_MANAGER_IP:2377
 done
 
 #create and assign labels
@@ -42,10 +42,10 @@ eval $(docker-machine env manager1)
 docker network create --attachable --driver overlay stress-net
 
 #create a test service
-docker service create --constraint node.role==worker --constraint node.labels.service==web --name nginx --network stress-net --replicas 3  -p 80:80  nginx
+docker service create --constraint node.role==worker --constraint node.labels.service==web --name nginx --network stress-net --detach=false --replicas 3  -p 80:80  nginx
 
 #create a test stress service
-docker service create --constraint node.role==worker --constraint node.labels.service==stress --network stress-net   --name stress  --replicas 3  dockersec/siege  -c 2 http://nginx
+docker service create --constraint node.role==worker --constraint node.labels.service==stress --name stress --network stress-net  --detach=false --replicas 3  dockersec/siege  -c 2 http://nginx
 
 ```
 
