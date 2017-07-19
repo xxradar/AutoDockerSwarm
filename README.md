@@ -20,14 +20,14 @@ export SWARM_MANAGER_IP=$(docker-machine ip manager1)
 for N in 2 3; do
 docker-machine create -d virtualbox  --swarm-experimental manager$N
 eval $(docker-machine env manager$N)
-docker swarm join --token $SWARM_MANAGER_JOIN_TOKEN $SWARM_MANAGER_IP
+docker swarm join --token $SWARM_MANAGER_JOIN_TOKEN $SWARM_MANAGER_IP:2377
 done
 
 #create 4 to 7 worker nodes
 for N in `seq 1 4`; do
 docker-machine create -d virtualbox  --swarm-experimental  worker$N
 eval $(docker-machine env worker$N)
-docker swarm join --token $SWARM_WORKER_JOIN_TOKEN $SWARM_MANAGER_IP
+docker swarm join --token $SWARM_WORKER_JOIN_TOKEN $SWARM_MANAGER_IP:2377
 done
 
 #create and assign labels
