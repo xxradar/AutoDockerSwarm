@@ -1,6 +1,9 @@
-# Auto-swarm-creation
+# Auto creating DOCKER SWARM clusters and running services
 
-This is an example on how to create, initialize and start some service on a Docker Swarm cluster using advanced features like labels, attachable overlays, etc ...
+This small project focuses on creating docker nodes, initialize docker swarm, creating a sample web service and traffic generation. The examples adds afvanced features like labels, attachable overlays, etc ... to make it a little more advanced.
+
+The script uses the latest version of docker-machine.
+See https://docs.docker.com/machine/install-machine/ for installation guidelines.
 
 
 ```
