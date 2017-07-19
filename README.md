@@ -3,7 +3,7 @@
 This is an example on how to create, initialize and start some service on a Docker Swarm cluster.
 
 
-<code>
+<code 
 #!/bin/bash
 docker-machine ls
 
@@ -51,6 +51,6 @@ docker service create --constraint node.role==worker --constraint node.labels.se
 #create a test stress service
 docker service create --constraint node.role==worker --constraint node.labels.service==stress --network stress-net   --name stress  --replicas 3  dockersec/siege  -c 2 http://nginx
 
-</code>
+>
 
 # Happy Testing
