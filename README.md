@@ -3,7 +3,8 @@
 This small project focuses on creating docker nodes, initialize docker swarm, creating a sample web service and traffic generation. The examples adds advanced features like labels, attachable overlays, etc ... to make it a little more advanced.
 
 The script uses the latest version of docker-machine.
-See https://docs.docker.com/machine/install-machine/ for installation guidelines.
+See https://docs.docker.com/machine/install-machine/ for installation guidelines. 
+Obtain the latest version at https://github.com/docker/machine/releases/
 
 
 ```
