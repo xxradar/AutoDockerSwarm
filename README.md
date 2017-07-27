@@ -1,4 +1,4 @@
-# Auto creating DOCKER SWARM clusters and running services
+# Auto creating DOCKER SWARM clusters on virtualbox and running services
 
 This small project focuses on creating docker nodes, initialize docker swarm, creating a sample web service and traffic generation. The examples adds advanced features like labels, attachable overlays, etc ... to make it a little more advanced.
 
